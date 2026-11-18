@@ -278,5 +278,9 @@ window.addEventListener('storage',event=>{
   else if(event.key===ENERGY_REFERENCE_KEY) render();
 });
 document.querySelectorAll('[data-icon]').forEach(el=>{el.outerHTML=icon(el.dataset.icon,16);});
-initProfile();render();
-if(!state.storageOK) notify('浏览器存储不可用，请启用本地存储后保存记录。');
+document.addEventListener('DOMContentLoaded', () => {
+  initProfile();
+  render();
+  document.querySelectorAll('[data-enable-on-ready]').forEach(button => { button.disabled = false; });
+  if(!state.storageOK) notify('浏览器存储不可用，请启用本地存储后保存记录。');
+}, {once:true});
